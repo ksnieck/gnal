@@ -5,6 +5,7 @@ package main
 import (
     "9fans.net/go/draw"
     "image"
+    "fmt"
 )
 
 func main() {
@@ -12,18 +13,14 @@ func main() {
   if err != nil { panic(err) }
   
   screen := d.ScreenImage
-
-
-  stringz := d.DefaultFont.StringSize("000000")
   var pstring image.Point
+  var s string
 
-  for {
-    screen.Draw(image.Rectangle{pstring, pstring.Add(stringz)}, d.White, nil, image.ZP)
-    screen.String(pstring, d.Black, image.ZP, d.DefaultFont, "gnal")
+  for i := 0; ; i++ {
+    s = fmt.Sprintf("%d", i)
+    screen.Draw(image.Rectangle{pstring, pstring.Add(d.DefaultFont.StringSize(s))}, d.White, nil, image.ZP)
+    screen.String(pstring, d.Black, image.ZP, d.DefaultFont, s)
     d.Flush()
   }
-
-
-
 
 }
